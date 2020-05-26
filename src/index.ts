@@ -1,4 +1,9 @@
+import app from './server';
 
-const name: string = "hello world!"
+const PORT = 3500
 
-export {}
+const server = app.listen(PORT, () => {
+    console.log(`Port is running on port ${PORT}`);
+})
+
+export default server;
