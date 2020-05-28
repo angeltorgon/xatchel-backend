@@ -6,6 +6,7 @@ const authRoute = express.Router();
 
 authRoute.post('/login', sessionValidation, (request: Request, res: Response) => {
     console.log(request.body)
+    console.log(request.session.cookie)
     res.send("logging in...")
 })
 
