@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 
 function sessionValidation(request: Request, response: Response, next: Function) {
-    console.log(request)
-    next()
-}
+    console.log(process.env.SESSION_SECRET);
+    next();
+};
+
+export default sessionValidation;
