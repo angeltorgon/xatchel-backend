@@ -8,5 +8,10 @@ authRoute.post('/login', (request: Request, res: Response) => {
     res.send("logging in...")
 })
 
+authRoute.post('/signup', (request: Request, res: Response) => {
+    console.log(request.body)
+    res.send("signing up...")
+})
+
 
 export default authRoute
