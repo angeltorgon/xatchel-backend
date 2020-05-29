@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import connection from '../config/dbConfig';
+import connection from '../config/connectionConfig';
 
 const Schema = mongoose.Schema;
 

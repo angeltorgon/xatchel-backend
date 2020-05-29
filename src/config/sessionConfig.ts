@@ -1,5 +1,5 @@
 import session from 'express-session';
-import connection from './dbConfig';
+import connection from './connectionConfig';
 const MongoStore = require('connect-mongo')(session);
 
 const sessionConfig = {
