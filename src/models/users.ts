@@ -7,6 +7,6 @@ const usersSchema = new Schema({
     name: String 
 });
 
-const usersModel = connection.model('users', usersSchema);
+const userModel = connection.model('user', usersSchema);
 
-export default usersModel;
+export default userModel;

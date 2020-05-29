@@ -1,0 +1,17 @@
+import session from 'express-session';
+import connection from './dbConfig';
+const MongoStore = require('connect-mongo')(session);
+
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({mongooseConnection: connection, collection: 'session'}),
+  cookie: { 
+        secure: false,
+        maxAge: 6000 
+    }
+
+};
+
+export default sessionConfig;
