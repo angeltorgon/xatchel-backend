@@ -4,7 +4,10 @@ import connection from '../config/connectionConfig';
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
-    name: String 
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String
 });
 
 const userModel = connection.model('user', usersSchema);
