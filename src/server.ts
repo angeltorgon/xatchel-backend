@@ -1,21 +1,27 @@
 require('dotenv').config();
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import session from 'express-session';
 import authRoute from './routes/auth';
 import userModel from './models/users';
 import sessionConfig from './config/sessionConfig';
 
-
 const app = express();
 
+app.set('trust proxy', 1);
 
 app.use(session(sessionConfig));
-
-app.set('trust proxy', 1); // trust first proxy
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
+app.use(helmet());
+
+/**
+ * 
+ *  ROUTES
+ */
+
 app.use('/auth', authRoute);
 
 app.get("/", async (req, res) => {
