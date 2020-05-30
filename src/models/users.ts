@@ -7,7 +7,9 @@ const usersSchema = new Schema({
     firstName: String,
     lastName: String,
     email: String,
-    password: String
+    password: String,
+    hash: String,
+    salt: String
 });
 
 const userModel = connection.model('user', usersSchema);

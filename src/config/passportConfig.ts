@@ -2,3 +2,39 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import connection from './connectionConfig';
 import UserModel from '../models/users';
+import { validatePassword } from '../lib/authUtils';
+import { IUser } from '../interfaces/interfaces'
+import { verify } from 'crypto';
+
+const verifyCallback = function(username: string, password: string, done: Function) {
+    UserModel.findOne({username: username}).then((user: IUser) => {
+        if(!user) return done(null, false);
+
+        const isValid = validatePassword(password, user.hash, user.salt);
+
+        if(isValid) {
+            return done(null, user)
+        } else {
+            return done(null, false)
+        }
+
+    }).catch((error) => {
+        done(error);
+    });
+};
+
+const strategy = new LocalStrategy(null, verifyCallback);
+
+passport.use(strategy);
+
+passport.serializeUser((user: IUser, done: Function) => {
+    done(null, user.id)
+})
+
+passport.deserializeUser((userId: number, done: Function) => {
+    UserModel.findById(userId).then((user) => {
+        done(null, user)
+    }).catch((error) => {
+        done(error)
+    })
+})
