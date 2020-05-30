@@ -12,5 +12,9 @@ export function validatePassword(password: string): validatePasswordInterface {
     return { salt, hash }
 }
 
-export function generatePassword(){}
+export function generatePassword(password: string, hash: string, salt: string): boolean{
+    const hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+
+    return hash === hashVerify;
+}
 
