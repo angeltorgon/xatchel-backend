@@ -1,11 +1,12 @@
 require('dotenv').config();
-import express from 'express';
+import express, { request } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import session from 'express-session';
 import authRoute from './routes/auth';
 import userModel from './models/users';
 import sessionConfig from './config/sessionConfig';
+import passport from './config/passportConfig';
 
 const app = express();
 
@@ -16,7 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 app.use(helmet());
+app.use(passport.initialize());
+app.use(passport.session());
 
+
+app.use((req, res, next) => {
+    console.log(req.session)
+    console.log(req.user)
+})
 /**
  * 
  *  ROUTES

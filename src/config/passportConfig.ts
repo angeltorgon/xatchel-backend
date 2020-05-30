@@ -1,10 +1,8 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import connection from './connectionConfig';
 import UserModel from '../models/users';
 import { validatePassword } from '../lib/authUtils';
 import { IUser } from '../interfaces/interfaces'
-import { verify } from 'crypto';
 
 const verifyCallback = function(username: string, password: string, done: Function) {
     UserModel.findOne({username: username}).then((user: IUser) => {
@@ -23,7 +21,12 @@ const verifyCallback = function(username: string, password: string, done: Functi
     });
 };
 
-const strategy = new LocalStrategy(null, verifyCallback);
+const customFields = {
+    usernameField: 'email',
+    passwordField: 'password'
+};
+
+const strategy = new LocalStrategy(customFields, verifyCallback);
 
 passport.use(strategy);
 
@@ -38,3 +41,5 @@ passport.deserializeUser((userId: number, done: Function) => {
         done(error)
     })
 })
+
+export default passport;
