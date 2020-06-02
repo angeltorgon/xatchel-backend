@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { Request, Response } from 'express';
+import { Request, Response, request } from 'express';
 import sessionValidation from '../middleware/sessionValidation';
 import userModel from '../models/users';
 import { generatePassword } from '../lib/authUtils';
@@ -37,6 +37,16 @@ authRoute.post('/signup', async (request: Request, response: Response) => {
     }
 
 })
+
+authRoute.get('/logout', (request: Request, response: Response) => {
+    request.logout()
+    request.session.destroy((error) => {
+        response.status(500).json({message: "There was an error logging out"})
+        return
+    })
+
+   response.status(200).json({message: "Logout success"})
+});
 
 
 export default authRoute
