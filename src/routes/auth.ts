@@ -8,15 +8,7 @@ import { generatePassword } from '../lib/authUtils';
 const authRoute = express.Router();
 
 authRoute.post('/login', passport.authenticate('local'), async (request: Request, res: Response) => {
-    const { email } = request.body
-    const [ user ] = await userModel.find({ email })
-
-    if (!user) {
-        res.status(400).json({message: "User not found"})
-    } else {
-        res.status(200).json({message: "Welcome!"})
-    }
-
+    res.status(200).json({message: "Welcome!"})
 })
 
 authRoute.post('/signup', async (request: Request, response: Response) => {
