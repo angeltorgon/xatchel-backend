@@ -7,7 +7,7 @@ import { generatePassword } from '../lib/authUtils';
 
 const authRoute = express.Router();
 
-authRoute.post('/login', passport.authenticate('local'), async (request: Request, res: Response) => {
+authRoute.post('/login', passport.authenticate('local'), (request: Request, res: Response) => {
     res.status(200).json({message: "Welcome!"})
 })
 
@@ -15,7 +15,7 @@ authRoute.post('/signup', async (request: Request, response: Response) => {
     try {
         const { email } = request.body
         const foundUser = await userModel.findOne({email}) 
-        console.log("user in signup - ", foundUser)
+
         if(foundUser) {
             response.status(400).json({message: "Email already exists."})
         } else {
@@ -28,8 +28,7 @@ authRoute.post('/signup', async (request: Request, response: Response) => {
             });
 
             const newUser = await newUserObject.save();
-            console.log("new user - ", newUser);
-            response.status(204)
+            response.status(204).send()
         }
         
     } catch (error) {

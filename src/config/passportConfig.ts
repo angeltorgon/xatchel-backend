@@ -6,7 +6,6 @@ import { IUser } from '../interfaces/interfaces'
 
 const verifyCallback = function(email: string, password: string, done: Function) {
     UserModel.findOne({ email }).then((user: IUser) => {
-        console.log("user in verifyCallback - ", user);
 
         if(!user) return done(null, false);
 
@@ -32,11 +31,14 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user: IUser, done: Function) => {
+    // console.log("userin serialize - ", user)
     done(null, user.id)
 })
 
 passport.deserializeUser((userId: number, done: Function) => {
+    console.log("uID in deserial - ", userId)
     UserModel.findById(userId).then((user) => {
+        console.log("user in deserial - ", user)
         done(null, user)
     }).catch((error) => {
         done(error)
