@@ -21,10 +21,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use((req, res, next) => {
-    console.log(req.session)
-    console.log(req.user)
-})
+// app.use((req, res, next) => {
+//     console.log('custom middleware - ', req.session)
+//     console.log('custom middleware - ', req.user)
+//     next();
+// })
+
 /**
  * 
  *  ROUTES

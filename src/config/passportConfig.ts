@@ -15,7 +15,6 @@ const verifyCallback = function(username: string, password: string, done: Functi
         } else {
             return done(null, false)
         }
-
     }).catch((error) => {
         done(error);
     });

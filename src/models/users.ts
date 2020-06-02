@@ -3,7 +3,7 @@ import connection from '../config/connectionConfig';
 
 const Schema = mongoose.Schema;
 
-const usersSchema = new Schema({
+const userSchema = new Schema({
     firstName: String,
     lastName: String,
     email: String,
@@ -12,6 +12,6 @@ const usersSchema = new Schema({
     salt: String
 });
 
-const userModel = connection.model('user', usersSchema);
+const userModel = connection.model('user', userSchema);
 
 export default userModel;

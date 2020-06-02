@@ -6,7 +6,7 @@ const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({mongooseConnection: connection, collection: 'session'}),
+  store: new MongoStore({mongooseConnection: connection, collection: 'sessions'}),
   cookie: { 
         secure: false,
         maxAge: 6000 
