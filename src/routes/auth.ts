@@ -20,21 +20,30 @@ authRoute.post('/login', passport.authenticate('local'), async (request: Request
 })
 
 authRoute.post('/signup', async (request: Request, response: Response) => {
-    const { salt, hash } = generatePassword(request.body.password);
-    const user = request.body
+    try {
+        const { email } = request.body
+        const foundUser = await userModel.findOne({email}) 
+        console.log("user in signup - ", foundUser)
+        if(foundUser) {
+            response.status(400).json({message: "Email already exists."})
+        } else {
+            const { salt, hash } = generatePassword(request.body.password);
+            const user = request.body;
+            const newUserObject = new userModel({
+                ...user,
+                hash,
+                salt
+            });
 
-    console.log("user from body - ", user);
+            const newUser = await newUserObject.save();
+            console.log("new user - ", newUser);
+            response.status(204)
+        }
+        
+    } catch (error) {
+        response.status(500).json({message: "There was an error."})
+    }
 
-    const newUserObject = new userModel({
-        ...user,
-        hash,
-        salt
-    });
-
-    const newUser = await newUserObject.save();
-    console.log("new user - ", newUser);
-
-    response.send('success')
 })
 
 
