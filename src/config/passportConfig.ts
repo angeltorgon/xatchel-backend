@@ -4,8 +4,10 @@ import UserModel from '../models/users';
 import { validatePassword } from '../lib/authUtils';
 import { IUser } from '../interfaces/interfaces'
 
-const verifyCallback = function(username: string, password: string, done: Function) {
-    UserModel.findOne({username: username}).then((user: IUser) => {
+const verifyCallback = function(email: string, password: string, done: Function) {
+    UserModel.findOne({ email }).then((user: IUser) => {
+        console.log("user in verifyCallback - ", user);
+
         if(!user) return done(null, false);
 
         const isValid = validatePassword(password, user.hash, user.salt);

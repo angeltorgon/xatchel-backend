@@ -7,11 +7,7 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({mongooseConnection: connection, collection: 'sessions'}),
-  cookie: { 
-        secure: false,
-        maxAge: 6000 
-    }
-
+  cookie: { secure: false, maxAge: 6000 }
 };
 
 export default sessionConfig;
