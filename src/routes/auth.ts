@@ -5,8 +5,7 @@ import userModel from '../models/users';
 
 const authRoute = express.Router();
 
-authRoute.post('/login', sessionValidation, async (request: Request, res: Response) => {
-    console.log('login - ', request.session.cookie)
+authRoute.post('/login', async (request: Request, res: Response) => {
     const { email } = request.body
     const [ user ] = await userModel.find({ email })
 
@@ -16,20 +15,18 @@ authRoute.post('/login', sessionValidation, async (request: Request, res: Respon
         res.status(200).json({message: "Welcome!"})
     }
 
-    console.log(user)
-
-    // userModel.create(user).then((something) => {
-    //     console.log(something)
-    //     res.send("success!!")
-    // }).catch((err) => {
-    //     console.log(err)
-    //     res.send('there was an error')
-    // })
 })
 
-authRoute.post('/signup', (request: Request, res: Response) => {
+authRoute.post('/signup', async (request: Request, res: Response) => {
     console.log(request.body)
-    res.send("signing up...")
+    const { email, password } = request.body
+    const [ user ] = await userModel.find({ email })
+
+    if (!user) {
+        res.status(200).json({message: "Welcome!"})
+    } else {
+        res.status(400).json({message: "Email already exists"})
+    }
 })
 
 
