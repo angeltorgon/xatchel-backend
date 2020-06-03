@@ -6,10 +6,9 @@ import session from 'express-session';
 import authRoute from './routes/auth';
 import sessionConfig from './config/sessionConfig';
 import passport from './config/passportConfig';
+import sessionValidation from './middleware/sessionValidation';
 
 const app = express();
-
-// app.set('trust proxy', 1);
 
 app.use(session(sessionConfig));
 app.use(express.json());
@@ -26,7 +25,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoute);
 
-app.get("/", (req, res) => {
+app.get("/", sessionValidation, (req, res) => {
     console.log(req.session)
     console.log(req.user)
     res.send("<h1>WELCOME!!!</h1>")
