@@ -1,11 +1,11 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import UserModel from '../models/users';
+import userModel from '../models/users';
 import { validatePassword } from '../lib/authUtils';
 import { IUser } from '../interfaces/interfaces'
 
 const verifyCallback = function(email: string, password: string, done: Function) {
-    UserModel.findOne({ email }).then((user: IUser) => {
+    userModel.findOne({ email }).then((user: IUser) => {
 
         if(!user) return done(null, false);
 
@@ -31,11 +31,13 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user: IUser, done: Function) => {
-    done(null, user.id)
+    console.log('user in serialize - ', user)
+    done(null, user._id)
 })
 
 passport.deserializeUser((userId: number, done: Function) => {
-    UserModel.findById(userId).then((user) => {
+    console.log("deserializing...")
+    userModel.findById(userId).then((user) => {
         done(null, user)
     }).catch((error) => {
         done(error)
