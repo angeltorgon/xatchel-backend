@@ -6,14 +6,9 @@ import cookieSession from 'cookie-session';
 import authRoute from './routes/auth';
 import sessionConfig from './config/sessionConfig';
 import passport from './config/passportConfig';
+import sessionValidation from './middleware/sessionValidation';
 
 const app = express();
-
-const cookieSessionConfig = /* secret keys */{
-    name: 'session',
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: ["some secret"],
-}
 
 app.use(cookieSession(sessionConfig));
 app.use(express.json());
@@ -30,7 +25,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoute);
 
-app.get("/", (req, res) => {
+app.get("/", sessionValidation, (req, res) => {
     res.send("<h1>WELCOME!!!</h1>")
 });
 
