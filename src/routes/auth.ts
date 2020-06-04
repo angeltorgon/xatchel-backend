@@ -6,16 +6,14 @@ import { generatePassword } from '../lib/authUtils';
 
 const authRoute = express.Router();
 
-authRoute.post('/login', passport.authenticate('local'), (request: Request, res: Response) => {
+authRoute.post('/login', passport.authenticate('local'), (request: Request, response: Response) => {
     const { user } = request
     request.logIn(user, (err) => {
         console.log(err)
+        response.status(500).json({message: "There was an error"})
     })
-    console.log("user in login route - ", user);
-    console.log("use authenticated in login - ", request.isAuthenticated())
-    console.log("sesssion - ", request.session)
-    console.log("cookies - ", request.cookies)
-    res.status(200).json({message: "Welcome!"})
+
+    response.status(200).json({message: "Welcome!"})
 })
 
 authRoute.post('/signup', async (request: Request, response: Response) => {

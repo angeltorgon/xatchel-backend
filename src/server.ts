@@ -31,7 +31,6 @@ app.use(passport.session());
 app.use('/auth', authRoute);
 
 app.get("/", (req, res) => {
-    console.log("is authenticated - ", req.isAuthenticated())
     res.send("<h1>WELCOME!!!</h1>")
 });
 
