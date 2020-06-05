@@ -10,13 +10,13 @@ import sessionValidation from './middleware/sessionValidation';
 
 const app = express();
 
-app.use(cookieSession(sessionConfig));
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(helmet());
+app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieSession(sessionConfig));
+app.use(express.json());
 
 /**
  * 
