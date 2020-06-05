@@ -25,7 +25,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoute);
 
-app.get("/", sessionValidation, (req, res) => {
+app.get("/", (req, res) => {
     res.send("<h1>WELCOME!!!</h1>")
 });
 
