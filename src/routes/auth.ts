@@ -3,6 +3,7 @@ import passport from 'passport';
 import { Request, Response } from 'express';
 import userModel from '../models/users';
 import { generatePassword } from '../lib/authUtils';
+import sessionValidation from '../middleware/sessionValidation';
 
 const authRoute = express.Router();
 
@@ -48,6 +49,10 @@ authRoute.get('/logout', (request: Request, response: Response) => {
     request.logOut()
 
     response.status(200).json({message: "Logout success"})
+});
+
+authRoute.get('/', sessionValidation, (request: Request, response: Response) => {
+    response.status(200).json({message: "Authorized"})
 });
 
 
