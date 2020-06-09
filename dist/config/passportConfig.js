@@ -29,9 +29,11 @@ const customFields = {
 const strategy = new passport_local_1.Strategy(customFields, verifyCallback);
 passport_1.default.use(strategy);
 passport_1.default.serializeUser((user, done) => {
+    console.log("serializing");
     done(null, user._id);
 });
 passport_1.default.deserializeUser((userId, done) => {
+    console.log("deserializing");
     users_1.default.findById(userId).then((user) => {
         done(null, user);
     }).catch((error) => {

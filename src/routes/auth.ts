@@ -9,8 +9,9 @@ const authRoute = express.Router();
 
 authRoute.post('/login', passport.authenticate('local'), (request: Request, response: Response) => {
     const { user } = request
+    request.session.email = user
+
     request.logIn(user, (err) => {
-        request.session.auth = true
         if(err) {
             console.log(err)
             response.status(500).json({message: "There was an error"})

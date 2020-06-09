@@ -31,10 +31,12 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser((user: IUser, done: Function) => {
+    console.log("serializing")
     done(null, user._id)
 })
 
 passport.deserializeUser((userId: number, done: Function) => {
+    console.log("deserializing")
     userModel.findById(userId).then((user) => {
         done(null, user)
     }).catch((error) => {
