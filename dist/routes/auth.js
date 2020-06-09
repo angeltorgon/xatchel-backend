@@ -21,6 +21,7 @@ const authRoute = express_1.default.Router();
 authRoute.post('/login', passport_1.default.authenticate('local'), (request, response) => {
     const { user } = request;
     request.logIn(user, (err) => {
+        request.session.auth = true;
         if (err) {
             console.log(err);
             response.status(500).json({ message: "There was an error" });

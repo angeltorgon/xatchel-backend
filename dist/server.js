@@ -14,7 +14,6 @@ const passportConfig_1 = __importDefault(require("./config/passportConfig"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(helmet_1.default());
-app.use(express_1.default.urlencoded({ extended: true }));
 app.use(passportConfig_1.default.initialize());
 app.use(passportConfig_1.default.session());
 app.use(cookie_session_1.default(sessionConfig_1.default));
