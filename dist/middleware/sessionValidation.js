@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function sessionValidation(request, response, next) {
-    // console.log("request in sessionValidation - ", request)
+    console.log("session in sessionValidation - ", request.session);
     if (request.isAuthenticated()) {
         console.log("is authenticated");
         next();

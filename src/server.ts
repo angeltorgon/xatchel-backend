@@ -6,7 +6,6 @@ import cookieSession from 'cookie-session';
 import authRoute from './routes/auth';
 import sessionConfig from './config/sessionConfig';
 import passport from './config/passportConfig';
-import sessionValidation from './middleware/sessionValidation';
 
 const app = express();
 
@@ -25,7 +24,7 @@ app.use(express.json());
 app.use('/auth', authRoute);
 
 app.get("/", (req, res) => {
-    res.send("<h1>WELCOME!!!</h1>")
+    res.send("<h1>WELCOME TO XATCHEL!!!</h1>")
 });
 
 export default app;

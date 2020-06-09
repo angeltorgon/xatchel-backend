@@ -7,9 +7,8 @@ import sessionValidation from '../middleware/sessionValidation';
 
 const authRoute = express.Router();
 
-authRoute.post('/login', passport.authenticate('local'), (request: Request, response: Response) => {
+authRoute.post('/login', passport.authenticate('local', null), (request: Request, response: Response) => {
     const { user } = request
-    request.session.email = user
 
     request.logIn(user, (err) => {
         if(err) {

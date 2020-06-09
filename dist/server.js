@@ -24,7 +24,7 @@ app.use(express_1.default.json());
  */
 app.use('/auth', auth_1.default);
 app.get("/", (req, res) => {
-    res.send("<h1>WELCOME!!!</h1>");
+    res.send("<h1>WELCOME TO XATCHEL!!!</h1>");
 });
 exports.default = app;
 //# sourceMappingURL=server.js.map

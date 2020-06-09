@@ -7,6 +7,7 @@ const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = require("passport-local");
 const users_1 = __importDefault(require("../models/users"));
 const authUtils_1 = require("../lib/authUtils");
+// This function is fired when a user is trying to log in and it verifies that their credentials are correct
 const verifyCallback = function (email, password, done) {
     users_1.default.findOne({ email }).then((user) => {
         if (!user)

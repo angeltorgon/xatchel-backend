@@ -18,9 +18,8 @@ const users_1 = __importDefault(require("../models/users"));
 const authUtils_1 = require("../lib/authUtils");
 const sessionValidation_1 = __importDefault(require("../middleware/sessionValidation"));
 const authRoute = express_1.default.Router();
-authRoute.post('/login', passport_1.default.authenticate('local'), (request, response) => {
+authRoute.post('/login', passport_1.default.authenticate('local', null), (request, response) => {
     const { user } = request;
-    request.session.email = user;
     request.logIn(user, (err) => {
         if (err) {
             console.log(err);

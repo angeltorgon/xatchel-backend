@@ -4,9 +4,9 @@ import userModel from '../models/users';
 import { validatePassword } from '../lib/authUtils';
 import { IUser } from '../interfaces/interfaces'
 
+// This function is fired when a user is trying to log in and it verifies that their credentials are correct
 const verifyCallback = function(email: string, password: string, done: Function) {
     userModel.findOne({ email }).then((user: IUser) => {
-
         if(!user) return done(null, false);
 
         const isValid = validatePassword(password, user.hash, user.salt);
