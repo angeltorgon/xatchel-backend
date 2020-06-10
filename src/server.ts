@@ -2,7 +2,7 @@ require('dotenv').config();
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import cookieSession from 'cookie-session';
+import session from 'express-session';
 import authRoute from './routes/auth';
 import sessionConfig from './config/sessionConfig';
 import passport from './config/passportConfig';
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(helmet());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieSession(sessionConfig));
+app.use(session(sessionConfig));
 app.use(express.json());
 
 /**
