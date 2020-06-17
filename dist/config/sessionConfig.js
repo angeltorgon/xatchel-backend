@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo')(express_session_1.default);
 const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: connectionConfig_1.default, collection: 'sessions' }),
     cookie: {
         secure: false,

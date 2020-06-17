@@ -5,7 +5,7 @@ const MongoStore = require('connect-mongo')(session);
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new MongoStore({mongooseConnection: connection, collection: 'sessions'}),
   cookie: { 
         secure: false,

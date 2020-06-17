@@ -25,8 +25,10 @@ authRoute.post('/login', passport_1.default.authenticate('local', null), (reques
             console.log(err);
             response.status(500).json({ message: "There was an error" });
         }
+        console.log("logging in user...", request.session);
     });
-    response.status(200).json({ message: "Welcome!" });
+    console.log("session - ", request.session.passport);
+    response.status(200).json({ message: "Welcome!" }).send();
 });
 authRoute.post('/signup', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {

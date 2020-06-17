@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 function sessionValidation(request: Request, response: Response, next: Function) {
-    console.log("session in sessionValidation - ", request.session)
+    console.log("session in sessionValidation - ", request.session);
 
     if (request.isAuthenticated()) {
         console.log("is authenticated")

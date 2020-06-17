@@ -8,16 +8,20 @@ import sessionValidation from '../middleware/sessionValidation';
 const authRoute = express.Router();
 
 authRoute.post('/login', passport.authenticate('local', null), (request: Request, response: Response) => {
-    const { user } = request
+    const { user } = request;
 
     request.logIn(user, (err) => {
         if(err) {
             console.log(err)
             response.status(500).json({message: "There was an error"})
         }
+
+        console.log("logging in user...", request.session)
     })
 
-    response.status(200).json({message: "Welcome!"})
+    console.log("session - ", request.session.passport)
+
+    response.status(200).json({message: "Welcome!"}).send()
 })
 
 authRoute.post('/signup', async (request: Request, response: Response) => {
