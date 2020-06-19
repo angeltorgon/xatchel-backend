@@ -56,7 +56,7 @@ authRoute.get('/logout', (request: Request, response: Response) => {
     response.status(200).json({message: "Logout success"})
 });
 
-authRoute.get('/', sessionValidation, (request: Request, response: Response) => {
+authRoute.get('/', (request: Request, response: Response) => {
     response.status(200).json({message: "Authorized"})
 });
 

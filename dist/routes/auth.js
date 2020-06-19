@@ -16,7 +16,6 @@ const express_1 = __importDefault(require("express"));
 const passport_1 = __importDefault(require("passport"));
 const users_1 = __importDefault(require("../models/users"));
 const authUtils_1 = require("../lib/authUtils");
-const sessionValidation_1 = __importDefault(require("../middleware/sessionValidation"));
 const authRoute = express_1.default.Router();
 authRoute.post('/login', passport_1.default.authenticate('local', null), (request, response) => {
     const { user } = request;
@@ -54,7 +53,7 @@ authRoute.get('/logout', (request, response) => {
     request.logOut();
     response.status(200).json({ message: "Logout success" });
 });
-authRoute.get('/', sessionValidation_1.default, (request, response) => {
+authRoute.get('/', (request, response) => {
     response.status(200).json({ message: "Authorized" });
 });
 exports.default = authRoute;
